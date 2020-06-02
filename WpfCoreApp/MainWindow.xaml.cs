@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Toolkit.Wpf.UI.XamlHost;
 
 namespace WpfCoreApp
 {
@@ -23,6 +24,30 @@ namespace WpfCoreApp
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void LocationBlock_ChildChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void MyCalendar_ChildChanged(object sender, EventArgs e)
+        {
+            WindowsXamlHost windowsXamlHost = (WindowsXamlHost)sender;
+
+            Windows.UI.Xaml.Controls.CalendarView calendarView =
+                (Windows.UI.Xaml.Controls.CalendarView)windowsXamlHost.Child;
+
+            if (calendarView != null)
+            {
+                calendarView.SelectedDatesChanged += (obj, args) =>
+                {
+                    if (args.AddedDates.Count > 0)
+                    {
+                        MessageBox.Show("The user selected a new date: " +
+                            args.AddedDates[0].DateTime.ToString());
+                    }
+                };
+            }
         }
     }
 }

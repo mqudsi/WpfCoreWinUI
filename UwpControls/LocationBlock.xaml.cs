@@ -1,23 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using System.ComponentModel;
+using Windows.UI.Xaml.Controls;
 using Windows.Devices.Geolocation;
+using System.ComponentModel;
+using System.Linq;
 
 // The Blank Window item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace WinUILibrary
+namespace UwpControls
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
@@ -33,7 +22,10 @@ namespace WinUILibrary
                 var access = await Geolocator.RequestAccessAsync();
                 if (access == GeolocationAccessStatus.Allowed)
                 {
-                    Location = Geolocator.DefaultGeoposition.ToString();
+                    var locator = new Geolocator();
+                    var location = await locator.GetGeopositionAsync(TimeSpan.FromMinutes(5), TimeSpan.FromSeconds(5));
+                    var coordinates = location.Coordinate.Point.Position;
+                    Location = $"{coordinates.Latitude} {coordinates.Longitude}";
                 }
             };
         }

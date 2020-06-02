@@ -1,11 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <Platforms>x64</Platforms>
-    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
+    <StartupObject>WpfCoreApp.Program</StartupObject>
+    <RuntimeIdentifiers>win10-x64;win-x64;win10-x86;win-x86</RuntimeIdentifiers>
     <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
   </PropertyGroup>
 
@@ -14,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WinUILibrary\WinUILibrary.csproj" />
+    <ProjectReference Include="..\UwpApp\UwpApp.csproj" />
+    <ProjectReference Include="..\UwpControls\UwpControls.csproj" />
   </ItemGroup>
+
 
 </Project>
